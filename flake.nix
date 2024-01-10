@@ -66,5 +66,9 @@
           }
         ];
       };
+
+      hydraJobs = nixpkgs.lib.filterAttrs
+        (k: v: k != "srcs" && (builtins.isAttrs v || v == null) && !nixpkgs.lib.isFunction v)
+        self.packages.x86_64-linux;
     };
 }
